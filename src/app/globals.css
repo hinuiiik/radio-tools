@@ -6,15 +6,42 @@
 }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --background: #0d1117; /* #0d1117 */
+  --foreground: #c9d1d9; /* #c9d1d9 */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --card: #161b22; /* #161b22 */
+  --card-foreground: #c9d1d9; /* #c9d1d9 */
+
+  --popover: #161b22; /* #161b22 */
+  --popover-foreground: #c9d1d9; /* #c9d1d9 */
+
+  --primary: #21262d; /* #21262d */
+  --primary-foreground: #c9d1d9; /* #c9d1d9 */
+
+  --secondary: #30363d; /* #30363d */
+  --secondary-foreground: #c9d1d9; /* #c9d1d9 */
+
+  --muted: #30363d; /* #30363d */
+  --muted-foreground: #8b949e; /* #8b949e */
+
+  --accent: #30363d; /* #30363d */
+  --accent-foreground: #c9d1d9; /* #c9d1d9 */
+
+  --destructive: #f85149; /* #f85149 */
+  --destructive-foreground: #ffffff; /* #ffffff */
+
+  --border: #30363d; /* #30363d */
+  --input: #30363d; /* #30363d */
+  --ring: #58a6ff; /* Slightly brighter GitHub blue */
+
+  /* Chart Colors */
+  --chart-1: #58a6ff; /* GitHub blue #58a6ff */
+  --chart-2: #4da09d; /* Teal */
+  --chart-3: #ffd700; /* Yellow */
+  --chart-4: #e6007e; /* Magenta */
+  --chart-5: #d55a2f; /* Orange */
+
+  --radius: 0.5rem;
 }
 
 body {
