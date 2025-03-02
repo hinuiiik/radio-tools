@@ -15,15 +15,15 @@ const APPWRITE_QSO_WEBHOOK_SIG_KEY = process.env.APPWRITE_QSO_WEBHOOK_SIG_KEY!;
 const APPWRITE_QSO_LOGS_COLLECTION_ID = process.env.APPWRITE_QSO_LOGS_COLLECTION_ID!;
 const APPWRITE_QSO_COMPLETE_COLLECTION_ID = process.env.APPWRITE_QSO_COMPLETE_COLLECTION_ID!;
 const APPWRITE_QSO_ERRORS_COLLECTION_ID = process.env.APPWRITE_QSO_ERRORS_COLLECTION_ID!;
+const APPWRITE_QSO_WEBHOOK_URL = process.env.APPWRITE_QSO_WEBHOOK_URL!;
 
 // Verify webhook
 async function verifySignature(req: NextRequest, body: string) {
     const signatureHeader = req.headers.get("x-appwrite-webhook-signature");
-    const webhookUrl = "https://w4vku-qsl.ddns.net/api/tools/callsign/webhook";
 
     if (!signatureHeader) return false;
 
-    const expectedHmac = crypto.createHmac("sha1", APPWRITE_QSO_WEBHOOK_SIG_KEY).update(webhookUrl + body).digest("base64");
+    const expectedHmac = crypto.createHmac("sha1", APPWRITE_QSO_WEBHOOK_SIG_KEY).update(APPWRITE_QSO_WEBHOOK_URL + body).digest("base64");
 
     return signatureHeader === expectedHmac;
 }
