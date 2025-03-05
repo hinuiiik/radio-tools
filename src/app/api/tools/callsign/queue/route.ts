@@ -62,6 +62,15 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({error: "Callsign already processed"}, {status: 409});
         }
 
+        // Check if already in queue
+        const queuedResponse = await databases.listDocuments(APPWRITE_QSO_DATABASE_ID, APPWRITE_QSO_QUEUE_COLLECTION_ID, [
+            Query.equal("callsign", callsign),
+            Query.equal("operator", operator),
+        ]);
+        if (queuedResponse.documents.length > 0) {
+            return NextResponse.json({error: "Callsign already in queue"}, {status: 409});
+        }
+
         // Ensure callsign exists in main log
         const existingResponse = await databases.listDocuments(APPWRITE_QSO_DATABASE_ID, APPWRITE_QSO_LOGS_COLLECTION_ID, [
             Query.equal("callsign", callsign),
