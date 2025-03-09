@@ -29,13 +29,13 @@ export default function CallsignListBox() {
         const fetchData = async () => {
             try {
                 const response = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
-                    Query.limit(10)
+                    Query.orderDesc("$createdAt"),
+                    Query.limit(10),
                 ]);
 
-                const reversedData = response.documents
-                    .map((doc) => doc as unknown as CallsignEntry)
-                    .reverse();
-                setData(reversedData);
+                const mappedData = response.documents
+                    .map((doc) => doc as unknown as CallsignEntry);
+                setData(mappedData);
             } catch (error) {
                 console.error("Failed to fetch data:", error);
             }
