@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
         }
 
         // Ensure alphanumeric
-        const alphanumericRegex = /^[a-zA-Z0-9]+$/;
+        const alphanumericRegex = /^[a-zA-Z0-9\/]+$/;
         if (!alphanumericRegex.test(callsign) || !alphanumericRegex.test(operator)) {
             return NextResponse.json({error: "Callsign and operator must be alphanumeric"}, {status: 400});
         }

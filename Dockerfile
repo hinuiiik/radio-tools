@@ -8,8 +8,8 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy tqsl folder from local machine to ~/.tqsl inside the container
-RUN mkdir -p /root/.tqsl
-COPY tqsl /root/.tqsl
+#RUN mkdir -p /root/.tqsl
+#COPY tqsl /root/.tqsl
 
 # Install pnpm globally
 RUN npm install -g pnpm
