@@ -107,19 +107,19 @@ async function processQueue() {
             const text = await fetchAndFormatQSO(callsign, operator);
 
             // Execute shell command
-            await executeShellCommand(text, callsign, operator);
-
+            // await executeShellCommand(text, callsign, operator);
+            //
             console.log("✅ Processed:", callsign);
-
-            // Write to completed database
-            await databases.createDocument(APPWRITE_QSO_DATABASE_ID, APPWRITE_QSO_COMPLETE_COLLECTION_ID, ID.unique(), {
-                callsign,
-                time: new Date(Date.now()),
-                operator,
-            });
-
-            // Delete from queue database
-            await databases.deleteDocument(APPWRITE_QSO_DATABASE_ID, APPWRITE_QSO_QUEUE_COLLECTION_ID, $id);
+            //
+            // // Write to completed database
+            // await databases.createDocument(APPWRITE_QSO_DATABASE_ID, APPWRITE_QSO_COMPLETE_COLLECTION_ID, ID.unique(), {
+            //     callsign,
+            //     time: new Date(Date.now()),
+            //     operator,
+            // });
+            //
+            // // Delete from queue database
+            // await databases.deleteDocument(APPWRITE_QSO_DATABASE_ID, APPWRITE_QSO_QUEUE_COLLECTION_ID, $id);
 
             return callsign;
         } catch (error) {
