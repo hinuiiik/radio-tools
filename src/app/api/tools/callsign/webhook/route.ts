@@ -43,7 +43,7 @@ function getCommand(operator: string): string {
 function executeShellCommand(text: string, callsign: string, operator: string): Promise<string> {
     const pass_str = getCommand(operator);
     exec(`echo "${text}" > temp.adi`);
-    const command = `tqsl -x -a abort -d -u ${pass_str} temp.adi`;
+    const command = `xvfb-run -a tqsl -x -a abort -d -u ${pass_str} temp.adi`;
     console.log(command);
 
     return new Promise((resolve, reject) => {
