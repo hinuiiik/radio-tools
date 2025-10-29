@@ -35,7 +35,7 @@ import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
 
 // Appwrite Configuration
 const client = new Client()
-    .setEndpoint("https://db.vikramk.dev/v1")
+    .setEndpoint("https://appwrite.vikramk.dev/v1")
     .setProject("67b52781000b36607bb9");
 
 const DATABASE_ID = "67b5295900277f82afc0";
