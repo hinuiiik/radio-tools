@@ -28,5 +28,5 @@ COPY . .
 RUN pnpm build
 
 # Set up Xvfb and start the application
-CMD ["pnpm start"]
+CMD ["pnpm", "start"]
 
