@@ -71,7 +71,7 @@ export default function SubmitCallsign() {
     });
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
-        setStatus("⏳ Queuing callsign...");
+        setStatus("Queuing callsign...");
         try {
             const res = await fetch("/api/tools/callsign/queue", {
                 method: "POST",
@@ -87,28 +87,28 @@ export default function SubmitCallsign() {
 
             if (res.ok) {
                 setProcessingId(data.id);
-                setStatus("✅ Callsign queued. Waiting for processing...");
+                setStatus("Callsign queued. Waiting for processing.");
             } else {
-                setStatus(`❌ Error: ${data.error}`);
+                setStatus(`Error: ${data.error}`);
             }
         } catch (error) {
             console.log(error);
-            setStatus("❌ Failed to queue callsign.");
+            setStatus("Failed to queue callsign.");
         }
     }
 
     useEffect(() => {
         if (!processingId) return;
 
-        console.log("🔹 Subscribing to:", processingId);
+        console.log("Subscribing to:", processingId);
 
         const unsubscribe = client.subscribe(
             `databases.${DATABASE_ID}.collections.${COLLECTION_ID}.documents.${processingId}`,
             (response) => {
-                console.log("🔔 Realtime event received:", response);
+                console.log("Realtime event received:", response);
 
                 if (response.events.includes("databases.*.collections.*.documents.*.delete")) {
-                    setStatus("✅ Callsign processed!");
+                    setStatus("Callsign processed!");
                     setProcessingId(null);
                     clearTimeout(timeoutId); // Clear timeout on success
                 }
@@ -117,21 +117,21 @@ export default function SubmitCallsign() {
 
         // Set a timeout for 45 seconds
         const timeoutId = setTimeout(() => {
-            setStatus("⏳ Timeout reached. An unknown error has occurred.");
+            setStatus("Timeout reached. An unknown error has occurred.");
             console.log("Timeout reached. Unsubscribing from:", processingId);
             unsubscribe();
             setProcessingId(null);
         }, 45000);
 
         return () => {
-            console.log("🔹 Unsubscribing from:", processingId);
+            console.log("Unsubscribing from:", processingId);
             clearTimeout(timeoutId);
             unsubscribe();
         };
     }, [processingId]);
 
     return (
-        <div className="border border-gray-700 bg-gray-900 p-6 rounded-lg shadow-lg max-w-md mx-auto">
+        <div className="border border-gray-200 bg-white p-6 max-w-md mx-auto">
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     {/* Callsign Input */}
@@ -140,11 +140,11 @@ export default function SubmitCallsign() {
                         name="callsign"
                         render={({field}) => (
                             <FormItem>
-                                <FormLabel className="text-gray-300">Callsign</FormLabel>
+                                <FormLabel className="text-gray-700">Callsign</FormLabel>
                                 <FormControl>
                                     <Input
                                         {...field}
-                                        className="w-full border border-gray-600 bg-gray-800 text-white rounded-md p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                        className="w-full border border-gray-300 bg-white text-gray-900 p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                                     />
                                 </FormControl>
                                 <FormMessage/>
@@ -158,7 +158,7 @@ export default function SubmitCallsign() {
                         name="operator"
                         render={({field}) => (
                             <FormItem className="flex flex-col">
-                                <FormLabel className="text-gray-300">DX Expedition</FormLabel>
+                                <FormLabel className="text-gray-700">DX Expedition</FormLabel>
                                 <Popover>
                                     <PopoverTrigger asChild>
                                         <FormControl>
@@ -166,7 +166,7 @@ export default function SubmitCallsign() {
                                                 variant="outline"
                                                 role="combobox"
                                                 className={cn(
-                                                    "w-full justify-between bg-gray-800 text-gray-300 border border-gray-600 hover:bg-gray-700",
+                                                    "w-full justify-between bg-white text-gray-700 border border-gray-300 hover:bg-gray-100",
                                                     !field.value && "text-muted-foreground"
                                                 )}
                                             >
@@ -179,7 +179,7 @@ export default function SubmitCallsign() {
                                         </FormControl>
                                     </PopoverTrigger>
                                     <PopoverContent
-                                        className="w-full p-0 bg-gray-900 border border-gray-700 rounded-md">
+                                        className="w-full p-0 bg-white border border-gray-200">
                                         <Command>
                                             <CommandInput placeholder="Search operator..."/>
                                             <CommandList>
@@ -192,14 +192,14 @@ export default function SubmitCallsign() {
                                                             onSelect={() => {
                                                                 form.setValue("operator", operator.value);
                                                             }}
-                                                            className="hover:bg-gray-800 text-gray-300"
+                                                            className="hover:bg-gray-100 text-gray-700"
                                                         >
                                                             {operator.label}
                                                             <Check
                                                                 className={cn(
                                                                     "ml-auto",
                                                                     operator.value === field.value
-                                                                        ? "opacity-100 text-blue-400"
+                                                                        ? "opacity-100 text-blue-600"
                                                                         : "opacity-0"
                                                                 )}
                                                             />
@@ -218,7 +218,7 @@ export default function SubmitCallsign() {
                     {/* Submit Button */}
                     <Button
                         type="submit"
-                        className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 rounded-md transition"
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 transition"
                         disabled={!!processingId}
                     >
                         {processingId ? "Processing..." : "Submit"}
@@ -228,7 +228,7 @@ export default function SubmitCallsign() {
 
             {/* Alert Box */}
             {status && (
-                <Alert className="mt-4 border border-gray-600 bg-gray-800 text-white">
+                <Alert className="mt-4 border border-gray-200 bg-gray-50 text-gray-800">
                     <AlertTitle>Status</AlertTitle>
                     <AlertDescription>{status}</AlertDescription>
                 </Alert>

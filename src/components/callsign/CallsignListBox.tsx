@@ -76,8 +76,8 @@ export default function CallsignListBox() {
     ];
 
     return (
-        <div className="border border-gray-700 bg-gray-900 p-4 rounded-lg shadow-lg">
-            <h2 className="text-white text-lg font-semibold mb-4">Latest Callsigns</h2>
+        <div className="border border-gray-200 bg-white p-4">
+            <h2 className="text-gray-900 text-lg font-semibold mb-4">Latest Callsigns</h2>
             <DataTable columns={columns} data={data}/>
         </div>
     );
