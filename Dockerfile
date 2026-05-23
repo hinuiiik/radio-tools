@@ -18,7 +18,7 @@ RUN npm install -g pnpm
 WORKDIR /usr/src/app
 
 # Install app dependencies using pnpm
-COPY package*.json ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install
 
 # Copy source files
