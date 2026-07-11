@@ -1,5 +1,5 @@
 # Use an official Node.js runtime as a parent image
-FROM node:20
+FROM node:24
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \

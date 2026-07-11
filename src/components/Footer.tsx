@@ -20,7 +20,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                 >
-                    Broken?
+                    Click here to send an email in case of issues.
                 </a>
             </p>
         </footer>

@@ -233,6 +233,16 @@ export default function SubmitCallsign() {
                     <AlertDescription>{status}</AlertDescription>
                 </Alert>
             )}
+            <p>
+                Notes:
+                <br></br>
+                All callsigns are taken directly from the QSO log files and submitted to TQSL.
+                A mismatched station in our logs can result in your callsign failing to submit, in which case please
+                check the footer to send an email.
+                <br></br><br></br>
+                The source QSO logs are updated periodically.
+
+            </p>
         </div>
     );
 }
